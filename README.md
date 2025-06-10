@@ -4,18 +4,39 @@
 
 For more information, [visit the home page for HoRNDIS on my site](http://www.joshuawise.com/horndis).
 
+## Build from source
+```sh
+git clone https://github.com/iKeramat/HoRNDIS --recursive
+xcodebuild
+```
+output: build/Release/HoRNDIS.kext
+
+## Installation preparing
+Shutdown your Mac
+
+Reboot to recovery mode but holding power/fingerprint button
+
+Go to Startup Security Utility and enable:
+
+* Allow user management of kernel extensions from identified developers
+* Allow remote management of kernel extensions and automatic software updates
+
+Open Terminal and type:
+```sh
+csrutil enable --without kext
+```
+And exit Recovery mode by reboot
+
 ## Installation
-
-### From Source/Binary
-
-* Get the installation package ([Download](http://www.joshuawise.com/horndis) or [Build](#building-the-source) the installation package from source yourself)
-* Run the installation package
-
-### From Homebrew
+Build your self or use binary from github [release](https://github.com/iKeramat/HoRNDIS/releases)
 
 ```sh
-brew cask install horndis
-sudo kextload /Library/Extensions/HoRNDIS.kext
+sudo cp -R HoRNDIS.kext /Library/Extensions
+sudo kextcache -update-volume /
+```
+Reboot
+```sh
+sudo kmutil load -p /Library/Extensions/HoRNDIS.kext
 ```
 
 ## Configuration
